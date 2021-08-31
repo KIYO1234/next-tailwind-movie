@@ -6,6 +6,7 @@ const MovieDetail = () => {
     <Fragment>
       <div>Movie Detail</div>
       <div>Created movie detail branch</div>
+      <div>Created movie detail branch again</div>
     </Fragment>
   );
 };
