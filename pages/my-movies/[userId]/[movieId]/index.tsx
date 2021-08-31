@@ -1,12 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Fragment } from "react";
 
 const MovieDetail = () => {
   return (
-    <div>
-      Movie Detail
-    </div>
-  )
-}
+    <Fragment>
+      <div>Movie Detail</div>
+      <div>Created movie detail branch</div>
+    </Fragment>
+  );
+};
 
-export default MovieDetail
-
+export default MovieDetail;
