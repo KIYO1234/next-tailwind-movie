@@ -6,6 +6,15 @@ export type Movie = {
   author: string;
   star?: number;
 };
+export type MovieWithUserId = {
+  userId: string;
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  author: string;
+  star?: number;
+};
 
 export type NewMovie = {
   id?: string | unknown

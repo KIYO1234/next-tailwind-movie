@@ -1,20 +1,21 @@
 import { ObjectId } from "mongodb";
-import React, { createContext, Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { connectToDatabase } from "../../../db/mongoDB";
-import { Movie } from "../../../Types";
+import { MovieWithUserId } from "../../../Types";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import HeadTag from "../../../components/HeadTag";
 import TrashIcon from "@heroicons/react/solid/TrashIcon";
 
-const MovieDetail = (props) => {
+const MyList = (props) => {
   const router = useRouter();
-  console.log('props.userId: ', props.userId);
-  const movies  = props.movies.reverse();
+  // console.log('props.userId: ', props.userId);
+  const movies = props.movies;
   console.log("movies(front): ", movies);
-  const deleteHandler = async (selectedMovie: Movie) => {
-    console.log("delete");
-    console.log("selectedMovie: ", selectedMovie);
+  const deleteHandler = async (selectedMovie: MovieWithUserId) => {
+    // console.log("delete");
+    // console.log("selectedMovie: ", selectedMovie);
+    selectedMovie.userId = props.userId;
     if (confirm("Are you sure your want to delete the movie?")) {
       const response = await fetch("/api/movies/deleteMovie", {
         method: "DELETE",
@@ -26,12 +27,13 @@ const MovieDetail = (props) => {
       const data = await response.json();
       console.log("data: ", data);
       alert(data.message);
-      router.push("/");
+      router.push(`/my-movies/${props.userId}`);
     } else {
       alert("Canceled");
     }
   };
-  const routeHandler = (selectedMovie: Movie) => {
+  const routeHandler = (selectedMovie: MovieWithUserId) => {
+    console.log('selectedMovie: ', selectedMovie);
     const url = selectedMovie.id;
     router.push(`/my-movies/${props.userId}/${url}`);
   };
@@ -87,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const user = await usersCollection.findOne({
     _id: new ObjectId(userId),
   });
-  const movies = user.movies.map(movie => ({
+  const movies = user.movies.reverse().map(movie => ({
     id: new ObjectId(movie.id).toString(),
     title: movie.title,
     image: movie.image,
@@ -104,4 +106,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default MovieDetail;
+export default MyList;

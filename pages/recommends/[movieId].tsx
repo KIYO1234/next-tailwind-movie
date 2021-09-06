@@ -7,8 +7,8 @@ import Image from "next/image";
 import { Movie } from "../../Types";
 
 type Props = {
-  movie: Movie
-}
+  movie: Movie;
+};
 
 const RecommendsDetail: React.FC<Props> = (props) => {
   const movie = props.movie;
@@ -16,8 +16,11 @@ const RecommendsDetail: React.FC<Props> = (props) => {
   return (
     <Fragment>
       <div className="mt-20 w-4/5 mx-auto">
-        <Image src={movie.image} width={200} height={300}/>
         <div>{props.movie.title}</div>
+        <div className="grid sm:grid-cols-1 md:grid-cols-3">
+          <img src={movie.image} className="w-40 grid " />
+          <div className="sm:col-span-1 md:col-span-2">{props.movie.description}</div>
+        </div>
       </div>
     </Fragment>
   );
@@ -28,9 +31,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // console.log('movieId: ', movieId);
   const id = new ObjectId(movieId);
   const client = await connectToDatabase();
-  const moviesCollection = client.db().collection('movies');
+  const moviesCollection = client.db().collection("movies");
   const movie = await moviesCollection.findOne({ _id: new ObjectId(movieId) });
-  console.log('movie: ', movie);
+  console.log("movie: ", movie);
 
   return {
     props: {
@@ -40,9 +43,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         author: movie.author,
         image: movie.image,
         description: movie.description,
-      }
-    }
-  }
-}
+      },
+    },
+  };
+};
 
 export default RecommendsDetail;
