@@ -8,6 +8,10 @@ module.exports = {
       lineClamp: {
         7: "7",
       },
+      screens: {
+        mobile: "600px",
+        desktop: "1000px",
+      },
     },
   },
   variants: {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Movie } from "../Types";
 import TrashIcon from "@heroicons/react/solid/TrashIcon";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 type Props = {
   movie: Movie;
@@ -12,27 +12,26 @@ const divHeight = {
 };
 
 const ListItem: React.FC<Props> = (props) => {
-  // console.log('props.todo: ', props.todo)
   const { movie } = props;
   const router = useRouter();
 
   const deleteHandler = async (selectedMovie: Movie) => {
     console.log("delete");
-    console.log('selectedMovie: ', selectedMovie);
-    if (confirm('Are you sure your want to delete the movie?')) {
-      const response = await fetch('/api/movies/deleteMovie', {
+    console.log("selectedMovie: ", selectedMovie);
+    if (confirm("Are you sure your want to delete the movie?")) {
+      const response = await fetch("/api/movies/deleteMovie", {
         method: "DELETE",
         body: JSON.stringify(selectedMovie),
         headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
-      console.log('data: ', data);
+      console.log("data: ", data);
       alert(data.message);
-      router.push('/');
+      router.push("/");
     } else {
-      alert('Canceled');
+      alert("Canceled");
     }
   };
 
