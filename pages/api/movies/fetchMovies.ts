@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import * as mongoDB from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
-import { connectToDatabase } from "../../db/mongoDB";
+import { connectToDatabase } from "../../../db/mongoDB";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
