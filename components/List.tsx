@@ -3,10 +3,12 @@ import ListItem from "./ListItem";
 import { Movie } from "../Types";
 
 type Props = {
-  movies: Movie[]
-}
+  movies: Movie[];
+};
 
 const List: React.FC<Props> = (props) => {
+  console.log("List: ", List);
+
   return (
     <ul>
       {props.movies.map((movie) => (

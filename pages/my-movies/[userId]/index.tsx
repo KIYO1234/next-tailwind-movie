@@ -1,13 +1,23 @@
 import { ObjectId } from "mongodb";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback, useMemo, useState } from "react";
 import { connectToDatabase } from "../../../db/mongoDB";
 import { MovieWithUserId } from "../../../Types";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import HeadTag from "../../../components/HeadTag";
 import TrashIcon from "@heroicons/react/solid/TrashIcon";
+import MemoSampleButton from "../../../components/MemoSampleButton";
+import Memo2Button from "../../../components/Memo2Button";
 
-const MyList = (props) => {
+type Props = {
+  onClick: Function;
+  movies: MovieWithUserId[];
+  userId: string;
+};
+
+const MyList: React.FC<Props> = (props: Props) => {
+  console.log("MyList");
+
   const router = useRouter();
   // console.log('props.userId: ', props.userId);
   const movies = props.movies;
@@ -33,10 +43,16 @@ const MyList = (props) => {
     }
   };
   const routeHandler = (selectedMovie: MovieWithUserId) => {
-    console.log('selectedMovie: ', selectedMovie);
+    console.log("selectedMovie: ", selectedMovie);
     const url = selectedMovie.id;
     router.push(`/my-movies/${props.userId}/${url}`);
   };
+
+  const clickOne = useCallback(() => {
+    console.log("memoSampleButton clicked");
+  }, []);
+
+  const [parent, setParent] = useState(0);
 
   if (movies) {
     return (
@@ -73,6 +89,12 @@ const MyList = (props) => {
             </li>
           ))}
         </ul>
+        <div>parent: {parent}</div>
+        <button onClick={() => setParent((prev) => prev + 1)}>
+          parent click
+        </button>
+        <MemoSampleButton onClick={clickOne} />
+        <Memo2Button />
       </Fragment>
     );
   } else {
@@ -89,7 +111,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const user = await usersCollection.findOne({
     _id: new ObjectId(userId),
   });
-  const movies = user.movies.reverse().map(movie => ({
+  const movies = user.movies.reverse().map((movie) => ({
     id: new ObjectId(movie.id).toString(),
     title: movie.title,
     image: movie.image,
