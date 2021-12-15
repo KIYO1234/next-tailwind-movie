@@ -3,8 +3,20 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import { Fragment } from "react";
 import { connectToDatabase } from "../../../../db/mongoDB";
+import { useRouter } from "next/router";
 
 const MovieDetail = (props) => {
+  console.log("詳細ページのprops: ", props);
+
+  const router = useRouter();
+  const isReady = router.isReady;
+
+  const toEditPage = (movieId) => {
+    console.log(`/my-movies/${props.user.userId}/${movieId}/edit/`);
+
+    // router.push(`/my-movies/${props.user.userId}/${movieId}/edit/`);
+  };
+
   return (
     <Fragment>
       <div className="mt-20 w-4/5 mx-auto">
@@ -13,7 +25,15 @@ const MovieDetail = (props) => {
           <div className="w-40">
             <img src={props.movie.image} />
           </div>
-          <div className="md:col-span-2">{props.movie.description}</div>
+          <div className="md:col-span-2 relative">
+            {props.movie.description}
+            {/* <button
+              onClick={() => toEditPage(props.movie.id)}
+              className="absolute right-0 px-2 py-1 bg-green-200"
+            >
+              編集
+            </button> */}
+          </div>
         </div>
       </div>
     </Fragment>
@@ -28,6 +48,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const client = await connectToDatabase();
   const usersCollection = await client.db().collection("users");
   const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+
+  console.log("👩 user: ", user);
+  const userID = user._id.toString();
   // console.log('👩 user.movies: ', user.movies)
   const movies = user.movies.reverse().map((movie) => ({
     id: new ObjectId(movie.id).toString(),
@@ -43,6 +66,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // const movie = {title: "sample"}
   return {
     props: {
+      user: {
+        userId: userID,
+      },
       movie: {
         id: new ObjectId(movie.id).toString(),
         title: movie.title,

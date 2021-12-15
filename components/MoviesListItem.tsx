@@ -47,10 +47,10 @@ const MoviesListItem = (props) => {
           className="w-full hidden group-hover:block group-hover:line-clamp-2 fixed text-xs bg-white"
           onClick={() => deleteHandler(movie)}
         >
-          <div className="text-right flex justify-end hover:opacity-50 cursor-pointer pt-1 mt-2">
+          {/* <div className="text-right flex justify-end hover:opacity-50 cursor-pointer pt-1 mt-2">
             <div>削除</div>
             <TrashIcon className="h-4 ml-2 mb-3" />
-          </div>
+          </div> */}
         </div>
       </div>
     </li>

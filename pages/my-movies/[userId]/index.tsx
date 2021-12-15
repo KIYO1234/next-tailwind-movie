@@ -89,12 +89,12 @@ const MyList: React.FC<Props> = (props: Props) => {
             </li>
           ))}
         </ul>
-        <div>parent: {parent}</div>
+        {/* <div>parent: {parent}</div>
         <button onClick={() => setParent((prev) => prev + 1)}>
           parent click
-        </button>
-        <MemoSampleButton onClick={clickOne} />
-        <Memo2Button />
+        </button> */}
+        {/* <MemoSampleButton onClick={clickOne} />
+        <Memo2Button /> */}
       </Fragment>
     );
   } else {

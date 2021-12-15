@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import { connectToDatabase } from "../../../db/mongoDB";
 
 const Edit = (props) => {
-  // console.log("props.movie: ", props.movie);
+  console.log("props.movie🛫: ", props.movie);
   const { movie } = props;
   const router = useRouter();
 
@@ -39,7 +39,7 @@ const Edit = (props) => {
       description,
     };
 
-    console.log('updatedMovie: ', updatedMovie)
+    console.log("updatedMovie: ", updatedMovie);
 
     const response = await fetch("/api/movies/updateMovie", {
       method: "POST",
@@ -52,8 +52,8 @@ const Edit = (props) => {
     const data = await response.json();
     console.log("⭐️ data: ", data);
 
-    if (data.message === 'Something went wrong...') {
-      alert('Something went wrong....')
+    if (data.message === "Something went wrong...") {
+      alert("Something went wrong....");
     } else {
       router.push("/");
     }
@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const client = await connectToDatabase();
   const moviesCollection = await client.db().collection("movies");
   const movies = await moviesCollection;
-  const movie = await movies.findOne({ _id: new ObjectId(movieId) })
+  const movie = await movies.findOne({ _id: new ObjectId(movieId) });
   // console.log('🐶 movie: ', movie);
   return {
     props: {
@@ -122,9 +122,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
         image: movie.image,
         author: movie.author,
         description: movie.description,
-      }
+      },
     },
-    revalidate: 600
+    revalidate: 600,
   };
 };
 

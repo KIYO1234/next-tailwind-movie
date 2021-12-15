@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
 import React, { Fragment, useContext, useRef, useState } from "react";
 import { LoginAuth, SignUpAuth } from "../Types";
-import { signIn } from 'next-auth/client';
+import { signIn } from "next-auth/client";
 import HeadTag from "../components/HeadTag";
 import bcrypt from "bcryptjs";
 
 const AuthForm = () => {
-
   const router = useRouter();
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
@@ -17,7 +16,7 @@ const AuthForm = () => {
     event.preventDefault();
     const enteredEmail: string = emailRef.current.value;
     const enteredPassword: string = passwordRef.current.value;
-    
+
     const loginAuthData: LoginAuth = {
       email: enteredEmail,
       password: enteredPassword,
@@ -34,15 +33,18 @@ const AuthForm = () => {
         alert("Invalid email or password");
       } else {
         alert("Successfully logged you in!");
-        router.push('/');
-     }
+        router.push("/");
+      }
     } else {
       // console.log("SignUp");
       // console.log("enteredEmail: ", enteredEmail);
       // console.log("enteredPassword: ", enteredPassword);
       const enteredUsername: string = usernameRef.current.value;
       const enteredConfirmPassword: string = confirmPasswordRef.current.value;
-      const hashedPassword: string = await bcrypt.hash(enteredConfirmPassword, 12);
+      const hashedPassword: string = await bcrypt.hash(
+        enteredConfirmPassword,
+        12
+      );
       // console.log('🔑 hashedPassword: ', hashedPassword);
 
       const signUpAuthData: SignUpAuth = {
@@ -53,7 +55,7 @@ const AuthForm = () => {
       };
 
       if (enteredPassword !== enteredConfirmPassword) {
-        alert('Passwords must match');
+        alert("Passwords must match");
         return;
       }
       const response = await fetch("/api/auth/signup", {
@@ -67,9 +69,9 @@ const AuthForm = () => {
       console.log("data: ", data);
       if (data.status === "Conflict") {
         alert(data.message);
-      } else if (data.status === 'Success') {
+      } else if (data.status === "Success") {
         alert(data.message);
-        router.push('/');
+        router.push("/");
       }
     }
   };
@@ -81,7 +83,11 @@ const AuthForm = () => {
 
   return (
     <Fragment>
-      <HeadTag title="Auth Form" description="This is an authentication form in which users enter their credentials" />
+      <HeadTag
+        title="Auth Form"
+        description="This is an authentication form in which users enter their credentials"
+      />
+      <div>git rebase のテスト</div>
       <form onSubmit={loginSignUpHandler}>
         <div className="w-1/2 mx-auto relative mt-28">
           <div className="text-center text-xl mb-10">

@@ -32,7 +32,7 @@ const MyMovies: React.FC<Props> = (props) => {
         description="This is a home page including the list of user's favorite movies"
       />
       <img src="/images/cinema.jpeg" alt="cover" className="w-full mb-6" />
-      <div className="pl-4 xl:text-red-500">おすすめ映画！！！</div>
+      <div className="pl-4">おすすめ映画</div>
       {/* <ul className="flex flex-wrap justify-between text-center mx-auto w-4/5 mb-40"> */}
       {movies && (
         <ul className="grid sm:grid-cols-2 md:grid-cols-4 text-center mx-auto w-4/5 mb-40">
@@ -41,7 +41,6 @@ const MyMovies: React.FC<Props> = (props) => {
           ))}
         </ul>
       )}
-      <ReactResponsive />
     </Fragment>
   );
 };
