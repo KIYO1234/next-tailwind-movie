@@ -44,11 +44,13 @@ const MainNavigation = () => {
               <a>Home</a>
             </Link>
           </div>
-          <div className="ml-10 hover:opacity-50">
-            <Link href="/new-movie">
-              <a>Add Movie</a>
-            </Link>
-          </div>
+          {session && (
+            <div className="ml-10 hover:opacity-50">
+              <Link href="/new-movie">
+                <a>Add Movie</a>
+              </Link>
+            </div>
+          )}
           <div className="ml-10 hover:opacity-50">
             {session ? (
               <button onClick={logOutHandler}>Logout</button>

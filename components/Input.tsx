@@ -16,10 +16,10 @@ const Input = () => {
 
   const addMovieHandler = async (event) => {
     event.preventDefault();
-    const enteredTitle:string = titleRef.current.value;
-    const enteredImage:string = imageRef.current.value;
-    const enteredAuthor:string = authorRef.current.value;
-    const enteredDesc:string = descRef.current.value;
+    const enteredTitle: string = titleRef.current.value;
+    const enteredImage: string = imageRef.current.value;
+    const enteredAuthor: string = authorRef.current.value;
+    const enteredDesc: string = descRef.current.value;
 
     const newMovie: NewMovie = {
       id: session.sub,
@@ -39,7 +39,8 @@ const Input = () => {
 
     const data = await response.json();
     // console.log("⭐️ data: ", data);
-    // router.push('/');
+    alert("Movie added!!");
+    router.push("/");
   };
 
   return (
