@@ -8,6 +8,7 @@ const Input = () => {
   const [session, loading] = useSession();
   console.log("session.sub: ", session.sub);
   console.log("git rebase from feature/rebase");
+  console.log("rebase (rebase3 branch)");
 
   const titleRef = useRef(null);
   const imageRef = useRef(null);
