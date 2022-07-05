@@ -6,7 +6,7 @@ import { useSession } from "next-auth/client";
 
 const Input = () => {
   const [session, loading] = useSession();
-  // console.log('session.sub: ', session.sub);
+  console.log("session.sub: ", session.sub);
 
   const titleRef = useRef(null);
   const imageRef = useRef(null);
