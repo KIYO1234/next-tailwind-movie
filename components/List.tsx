@@ -7,7 +7,7 @@ type Props = {
 };
 
 const List: React.FC<Props> = (props) => {
-  console.log("List: ", List);
+  console.log("List (change from master): ", List);
 
   return (
     <ul>
