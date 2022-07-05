@@ -14,6 +14,7 @@ const divHeight = {
 const ListItem: React.FC<Props> = (props) => {
   const { movie } = props;
   const router = useRouter();
+  console.log("listItem (git rebase practice)");
 
   const deleteHandler = async (selectedMovie: Movie) => {
     console.log("delete");
