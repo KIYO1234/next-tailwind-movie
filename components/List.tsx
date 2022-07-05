@@ -7,7 +7,7 @@ type Props = {
 };
 
 const List: React.FC<Props> = (props) => {
-  console.log("List (change main branch): ", List);
+  console.log("List (change from main branch): ", List);
 
   return (
     <ul>
