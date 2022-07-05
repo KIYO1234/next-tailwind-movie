@@ -8,6 +8,7 @@ type Props = {
 
 const List: React.FC<Props> = (props) => {
   console.log("List: ", List);
+  console.log("rebase");
 
   return (
     <ul>
