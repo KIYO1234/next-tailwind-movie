@@ -2,7 +2,8 @@ import React, { memo, useState, useCallback, useMemo } from "react";
 
 const MemoSampleButton = (props) => {
   console.log("MemoSampleButton");
-
+  console.log("change from remote pull branch")
+  
   const [isHover, setIsHover] = useState(false);
   const title = "MemoSampleButton";
 
