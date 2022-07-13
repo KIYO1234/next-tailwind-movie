@@ -6,6 +6,7 @@ import TrashIcon from "@heroicons/react/solid/TrashIcon";
 const MoviesListItem = (props) => {
   const router = useRouter();
   const { movie } = props;
+  console.log("change from remote branch")
 
   const deleteHandler = async (selectedMovie: Movie) => {
     console.log("delete");
